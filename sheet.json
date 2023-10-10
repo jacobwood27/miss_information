@@ -145,7 +145,7 @@
     },
     {
         "id": "centenarians_gender_fraction",
-        "text": "According to Our World in Data, using data published by United Nations, Department of Economic and Social Affairs, Population Division (2022). Number of males per 100 females in the population. <a href=\"https://ourworldindata.org/grapher/sex-ratio-by-age?facet=none\">Chart</a>.",
+        "text": "According to Our World in Data, using data published by United Nations, Department of Economic and Social Affairs, Population Division (2022). Using the data from number of males per 100 females in the population to construct fraction. <a href=\"https://ourworldindata.org/grapher/sex-ratio-by-age?facet=none\">Chart</a>.",
         "question": "As of 2021, globally, what fraction of people aged >100 are male?",
         "answer": "19%",
         "range1": "\u00b1 2 pp",
