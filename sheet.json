@@ -98,7 +98,7 @@
     {
         "id": "pixar_films",
         "text": "According to the <a href=\"https://www.pixar.com/feature-films-launch\">Feature Films section of the Pixar website</a>.",
-        "question": "How many feature films has Pixar produced as of 2023/10/06?",
+        "question": "How many feature films has Pixar produced as of October 10, 2023?",
         "answer": "27",
         "range1": "\u00b1 5%",
         "range2": "\u00b1 10%",
