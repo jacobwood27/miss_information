@@ -29,12 +29,6 @@
             align-items: center;
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 1.2em;
-            border-radius: 5px;
-        }
-
         body {
             font-size: 1rem;
         }
@@ -44,8 +38,28 @@
 <body>
     <h2>Welcome to Miss Information!</h2>
     How many players?
-    <br> <input type="number" id="rowInput" min="3" max="12" step="1" value="4"> <button
-        onclick="generateTable()">GENERATE ROLES</button>
+    <br>         
+    <select id="rowInput">
+        <option value="3">3</option>
+        <option value="4" selected>4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">1o</option>
+        <option value="11">11</option>
+        <option value="12">12</option> 
+    </select>
+    <button onclick="generateTable()"> GENERATE ROLES </button>
+
+
+
+
+
+
+        </select>
+        
     <br><br>
     <div id="tableContainer">
         <!-- Table will be generated here -->
@@ -184,7 +198,8 @@
     };
 
     function generateTable() {
-        const numRows = parseInt(document.getElementById('rowInput').value);
+        const numRows = parseInt(document.getElementById('rowInput').value)
+        console.log(numRows);
 
         const table = document.createElement('table');
         table.border = '1';
