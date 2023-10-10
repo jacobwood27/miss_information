@@ -169,11 +169,11 @@
         table.border = '1';
         const tbody = document.createElement('tbody');
         
-        var roles = Array.from({ length: numRows }, (_, i) => "Advocate"); // Creates an array [1, 2, ..., 12]
-        roles[0] = "Moderator";
-        roles[1] = "Miss Information";
+        var roles = Array.from({ length: numRows }, (_, i) => "ADVOCATE"); // Creates an array [1, 2, ..., 12]
+        roles[0] = "ARBITRATOR";
+        roles[1] = "MISS INFORMATION";
         if (numRows > 6) {
-            roles[2] = "Miss Information";
+            roles[2] = "MISS INFORMATION";
         }
 
         roles.sort(() => 0.5 - Math.random());
