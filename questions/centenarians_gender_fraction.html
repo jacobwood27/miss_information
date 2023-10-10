@@ -1,0 +1,108 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Miss Information</title>
+    </head>
+    <body>
+    <h2>As of 2021, globally, what fraction of people aged >100 are male?</h2>
+    <table >
+        <tbody>
+            <tr>
+                <td>Rough:</td>
+                <td>± 2 pp</td>
+            </tr>
+            <tr>
+                <td>Refined:</td>
+                <td>± 5 pp</td>
+            </tr>
+            <tr>
+                <td>Precise:</td>
+                <td>± 10 pp</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <button id="toggleButton">Show Answer</button>
+
+    <div id="myDiv" style="display: none;">
+        <h2>19%</h2>
+        <table >
+            <tbody>
+                <tr>
+                    <td>Rough:</td>
+                    <td>17% - 21%</td>
+                </tr>
+                <tr>
+                    <td>Refined:</td>
+                    <td>14% - 24%</td>
+                </tr>
+                <tr>
+                    <td>Precise:</td>
+                    <td>9% - 29%</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    
+    <button onclick="random_question()" id="skipq">Skip Question</button>
+    <button onclick="next_round()" id="next_round" style="display: none;">Next Round</button>
+
+    <br><br>
+    <h4>Fine Print</h4>
+    According to Our World in Data, using data published by United Nations, Department of Economic and Social Affairs, Population Division (2022). Number of males per 100 females in the population. <a href="https://ourworldindata.org/grapher/sex-ratio-by-age?facet=none">Chart</a>.
+    </body>
+
+    </html>
+
+
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            let div = document.getElementById("myDiv");
+            if (div.style.display === "none") {
+                div.style.display = "block";
+                this.style.display = "none";
+                let skipq = document.getElementById("skipq");
+                skipq.style.display = "none";
+                let next_round = document.getElementById("next_round");
+                next_round.style.display = "block";
+            } else {
+                div.style.display = "none";
+                this.innerHTML = "Show Answer";
+            }
+        });
+        
+        var q_data
+        fetch('/sheet.json')
+            .then(response => response.json())
+            .then(data => {
+                q_data = data;
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+            });
+    
+        function random_question() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+            
+            const randomIndex = Math.floor(Math.random() * q_data.length);
+            const randomElement = q_data[randomIndex];
+            window.location.href = "/questions/" + randomElement.id + ".html?players=" + players;
+        }   
+
+        function next_round() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+
+            window.location.href = "/index.html?players=" + players;
+
+        }   
+    </script>
+    

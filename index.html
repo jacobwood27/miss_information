@@ -3,12 +3,223 @@
 <head>
     <meta charset="utf-8">
     <title>Miss Information</title>
+    <style>
+        .hidden-text {
+            color: white;  /* Assuming the background color of the cell is white */
+        }
+
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .hidden-button {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
-    
-    Hello.
+    <h2>Welcome to Miss Information!</h2>
+    How many players?
+    <br> <input type="number" id="rowInput" min="3" max="12" step="1" value="4"> <button onclick="generateTable()">GENERATE ROLES</button>
+    <br><br>
+    <div id="tableContainer">
+        <!-- Table will be generated here -->
+    </div>
 
+    <br><br>
+    <button onclick="random_question()">START ROUND</button>
+    <br><br>
+    <h3>How to play?</h3>
+    <ol>
+        <li>Select a DIFFICULTY LEVEL (ROUGH, REFINED, or PRECISE)
+        <li>Assign Roles</li>
+        <ul>
+            <li>Enter number of players and click GENERATE ROLES</li>
+            <li>Each player presses and holds SHOW ROLE to see their role, one at a time</li>
+            <li>ARBITRATOR should reveal themselves to the group</li>
+            <li>If &lt;7 players, there will be 1 MISS INFORMATION role</li>
+            <li>If &ge;7 players, there will be 2 MISS INFORMATION roles</li>
+            <li>Remaining players are ADVOCATES</li>
+        </ul>
+        <li>Start the round by clicking START ROUND</li>
+        <li>The ARBITRATOR reads aloud the question and the answer range corresponding to DIFFICULTY LEVEL</li>
+        <li>Begin group discussion</li>
+        <ul>
+            <li>ARBITRATOR facilitates and steers the conversation</li>
+            <li>ADVOCATES aim to guide the group toward the accurate answer</li>
+            <li>MISS INFORMATION subtly tries to lead the group astray</li>
+        </ul>
+        <li>Reveal the Answer</li>
+        <ul>
+            <li>Once the ARBITRATOR is confident, they declare the group's answer</li>
+            <li>Click SHOW ANSWER to uncover the correct answer and its valid range</li>
+        </ul>
+        <li>Determine the Winner</li>
+        <ul>
+            <li>If the group's answer lies within the range, the ADVOCATES and the ARBITRATOR triumph</li>
+            <li>If the answer falls outside the range, MISS INFORMATION celebrates the victory!</li>
+        </ul>
+    </ol>
+
+
+    
 </body>
 
 </html>
+
+<!-- Implement random_question() -->
+<script>
+
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var players = urlParams.get('players');
+
+    // if players is a number then replace the default value with it
+    if (players != null && !isNaN(players)) {
+        document.getElementById('rowInput').value = players;
+    }
+
+    function showRole(buttonElement) {
+        const roleCell = buttonElement.parentElement.previousElementSibling;
+        roleCell.classList.toggle('hidden');
+    }
+
+    // read in sheet.json
+    var q_data
+    fetch('sheet.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            q_data = data;
+        })
+        .catch(error => {
+            console.error('Error fetching the JSON file:', error);
+        });
+
+    function random_question() {
+        console.log(q_data)
+        const randomIndex = Math.floor(Math.random() * q_data.length);
+        const randomElement = q_data[randomIndex];
+        window.location.href = "questions/" + randomElement.id + ".html?players=" + document.getElementById('rowInput').value;
+    }   
+
+    function revealText(buttonElement) {
+        const roleCell = buttonElement.parentElement.previousElementSibling;
+        roleCell.classList.remove('hidden-text');
+    }
+    
+    function hideText(buttonElement) {
+        const roleCell = buttonElement.parentElement.previousElementSibling;
+        roleCell.classList.add('hidden-text');
+    }
+    
+    function processButtonRelease(buttonElement) {
+        hideText(buttonElement);
+        buttonElement.classList.add('hidden-button');
+    
+        let nextRow;
+        if (buttonElement.parentElement.parentElement.nextElementSibling) {
+            nextRow = buttonElement.parentElement.parentElement.nextElementSibling;
+        } else {
+            // Wrap around to the first row if at the last row
+            nextRow = document.querySelector('table tbody tr');
+            nextRow = document.querySelector('table tbody tr');
+        }
+    
+        const nextButton = nextRow.querySelector('.show-role-button');
+        nextButton.classList.remove('hidden-button');
+    }
+    
+    const buttons = document.querySelectorAll('.show-role-button');
+    buttons.forEach(button => {
+        button.addEventListener('mousedown', (e) => revealText(e.target));
+        button.addEventListener('mouseup', (e) => processButtonRelease(e.target));
+    
+        // Mobile touch events
+        button.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevent mouse event emulation
+            revealText(e.target);
+        });
+        button.addEventListener('touchend', (e) => {
+            e.preventDefault(); // Prevent mouse event emulation
+            processButtonRelease(e.target);
+        });
+    });
+
+
+    function show_roles() {
+        let div = document.getElementById("roles");
+        if (div.style.display === "none") {
+            div.style.display = "block";
+            this.innerHTML = "Hide Answer";
+        } else {
+            div.style.display = "none";
+            this.innerHTML = "Show Answer";
+        }
+    };
+
+    function generateTable() {
+        const numRows = parseInt(document.getElementById('rowInput').value);
+    
+        const table = document.createElement('table');
+        table.border = '1';
+        const tbody = document.createElement('tbody');
+        
+        var roles = Array.from({ length: numRows }, (_, i) => "Advocate"); // Creates an array [1, 2, ..., 12]
+        roles[0] = "Moderator";
+        roles[1] = "Miss Information";
+        if (numRows > 6) {
+            roles[2] = "Miss Information";
+        }
+
+        roles.sort(() => 0.5 - Math.random());
+        
+        console.log(roles);
+    
+        for (let i = 0; i < numRows; i++) {
+            const tr = document.createElement('tr');
+    
+            const td1 = document.createElement('td');
+            td1.textContent = 'Player ' + (i + 1);
+            tr.appendChild(td1);
+    
+            const td2 = document.createElement('td');
+            td2.textContent = roles[i];
+            td2.classList.add('hidden-text', 'no-select');
+            tr.appendChild(td2);
+    
+            const td3 = document.createElement('td');
+            const button = document.createElement('button');
+            button.textContent = 'SHOW ROLE';
+            button.classList.add('show-role-button');
+            if (i !== 0) {
+                button.classList.add('hidden-button');
+            }
+            button.onmousedown = function() { revealText(button); };
+            button.onmouseup = function() { processButtonRelease(button); };
+            button.onmouseleave = function() { hideText(button); };
+            button.ontouchstart = function(e) {
+                e.preventDefault();
+                revealText(button);
+            };
+            button.ontouchend = function(e) {
+                e.preventDefault();
+                processButtonRelease(button);
+            };
+            td3.appendChild(button);
+            tr.appendChild(td3);
+    
+            tbody.appendChild(tr);
+        }
+    
+        table.appendChild(tbody);
+        document.getElementById('tableContainer').innerHTML = '';  // Clear previous table if exists
+        document.getElementById('tableContainer').appendChild(table);
+    }
+
+    generateTable();
+</script>

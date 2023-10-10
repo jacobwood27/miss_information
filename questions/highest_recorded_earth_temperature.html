@@ -1,0 +1,108 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Miss Information</title>
+    </head>
+    <body>
+    <h2>What is the highest recorded air temperature on Earth, in degrees Celsius?</h2>
+    <table >
+        <tbody>
+            <tr>
+                <td>Rough:</td>
+                <td>± 1 C</td>
+            </tr>
+            <tr>
+                <td>Refined:</td>
+                <td>± 2 C</td>
+            </tr>
+            <tr>
+                <td>Precise:</td>
+                <td>± 3 C</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <button id="toggleButton">Show Answer</button>
+
+    <div id="myDiv" style="display: none;">
+        <h2>56.7</h2>
+        <table >
+            <tbody>
+                <tr>
+                    <td>Rough:</td>
+                    <td>55.7 - 57.7</td>
+                </tr>
+                <tr>
+                    <td>Refined:</td>
+                    <td>54.7 - 58.7</td>
+                </tr>
+                <tr>
+                    <td>Precise:</td>
+                    <td>53.7 - 59.7</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    
+    <button onclick="random_question()" id="skipq">Skip Question</button>
+    <button onclick="next_round()" id="next_round" style="display: none;">Next Round</button>
+
+    <br><br>
+    <h4>Fine Print</h4>
+    According to the Wikipedia article <a href="https://en.wikipedia.org/wiki/Highest_temperature_recorded_on_Earth">Highest temperature recorded on Earth</a>. <br><br>Additional context, from the Wikipedia article: <br>The highest temperature recorded on Earth has been measured in three major ways: air, ground, and via satellite observation. Air measurements are used as the standard measurement due to persistent issues with unreliable ground and satellite readings. Air measurements are noted by the World Meteorological Organization (WMO) and Guinness World Records among others as the standard to be used for determining the official record. The current official highest registered air temperature on Earth is <mark>???</mark> °C (xxx °F), recorded on 10 July 1913 at Furnace Creek Ranch, in Death Valley in the United States.[1] For ninety years, a former record that was measured in Libya had been in place, until it was decertified in 2012 based on evidence that it was an erroneous reading. This finding has since raised questions about the legitimacy of the 1913 record measured in Death Valley, with several meteorological experts asserting that there were similar irregularities. The WMO has stood by the record as official pending any future investigative results. If the current record were to be decertified then the holder would be a tie at xxx °C (xxx °F), recorded both at Furnace Creek and in Kuwait.[a]Several unverified temperatures that exceed the current record have also been recorded. These include historical claims that were never authenticated due to the equipment available at the time and unverified scientific claims. There are also disproven amateur readings that have been posted on social media showing evidence of extreme temperature.
+    </body>
+
+    </html>
+
+
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            let div = document.getElementById("myDiv");
+            if (div.style.display === "none") {
+                div.style.display = "block";
+                this.style.display = "none";
+                let skipq = document.getElementById("skipq");
+                skipq.style.display = "none";
+                let next_round = document.getElementById("next_round");
+                next_round.style.display = "block";
+            } else {
+                div.style.display = "none";
+                this.innerHTML = "Show Answer";
+            }
+        });
+        
+        var q_data
+        fetch('/sheet.json')
+            .then(response => response.json())
+            .then(data => {
+                q_data = data;
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+            });
+    
+        function random_question() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+            
+            const randomIndex = Math.floor(Math.random() * q_data.length);
+            const randomElement = q_data[randomIndex];
+            window.location.href = "/questions/" + randomElement.id + ".html?players=" + players;
+        }   
+
+        function next_round() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+
+            window.location.href = "/index.html?players=" + players;
+
+        }   
+    </script>
+    

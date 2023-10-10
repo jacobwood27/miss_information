@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/qr/lord_of_the_flies_publish.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/qr/lord_of_the_flies_publish.html"
+        }
+    ]
+}

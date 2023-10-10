@@ -1,0 +1,108 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Miss Information</title>
+    </head>
+    <body>
+    <h2>What is the total length of the Great Wall of China, in kilometers?</h2>
+    <table >
+        <tbody>
+            <tr>
+                <td>Rough:</td>
+                <td>± 10%</td>
+            </tr>
+            <tr>
+                <td>Refined:</td>
+                <td>± 25%</td>
+            </tr>
+            <tr>
+                <td>Precise:</td>
+                <td>± 50%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <button id="toggleButton">Show Answer</button>
+
+    <div id="myDiv" style="display: none;">
+        <h2>21196</h2>
+        <table >
+            <tbody>
+                <tr>
+                    <td>Rough:</td>
+                    <td>19,076 - 23,316</td>
+                </tr>
+                <tr>
+                    <td>Refined:</td>
+                    <td>15,897 - 26,495</td>
+                </tr>
+                <tr>
+                    <td>Precise:</td>
+                    <td>10,598 - 31,794</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    
+    <button onclick="random_question()" id="skipq">Skip Question</button>
+    <button onclick="next_round()" id="next_round" style="display: none;">Next Round</button>
+
+    <br><br>
+    <h4>Fine Print</h4>
+    According to the Wikipedia article <a href="https://en.wikipedia.org/wiki/Great_Wall_of_China">Great Wall of China</a>. <br><br>Additional context from the article: <br>The Great Wall of China is a series of fortifications that were built across the historical northern borders of ancient Chinese states and Imperial China as protection against various nomadic groups from the Eurasian Steppe. Several walls were built from as early as the 7th century BC, with selective stretches later joined by Qin Shi Huang (220-206 BC), the first emperor of China. Little of the Qin wall remains. Later on, many successive dynasties built and maintained multiple stretches of border walls. The best-known sections of the wall were built by the Ming dynasty (1368-1644).<br>Apart from defense, other purposes of the Great Wall have included border controls, allowing the imposition of duties on goods transported along the Silk Road, regulation or encouragement of trade and the control of immigration and emigration. Furthermore, the defensive characteristics of the Great Wall were enhanced by the construction of watchtowers, troop barracks, garrison stations, signaling capabilities through the means of smoke or fire, and the fact that the path of the Great Wall also served as a transportation corridor.<br>The frontier walls built by different dynasties have multiple courses. Collectively, they stretch from Liaodong in the east to Lop Lake in the west, from the present-day Sino-Russian border in the north to Tao River (Taohe) in the south; along an arc that roughly delineates the edge of the Mongolian steppe; spanning <mark>???</mark> km (xxx mi) in total. Today, the defensive system of the Great Wall is generally recognized as one of the most impressive architectural feats in history.
+    </body>
+
+    </html>
+
+
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            let div = document.getElementById("myDiv");
+            if (div.style.display === "none") {
+                div.style.display = "block";
+                this.style.display = "none";
+                let skipq = document.getElementById("skipq");
+                skipq.style.display = "none";
+                let next_round = document.getElementById("next_round");
+                next_round.style.display = "block";
+            } else {
+                div.style.display = "none";
+                this.innerHTML = "Show Answer";
+            }
+        });
+        
+        var q_data
+        fetch('/sheet.json')
+            .then(response => response.json())
+            .then(data => {
+                q_data = data;
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+            });
+    
+        function random_question() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+            
+            const randomIndex = Math.floor(Math.random() * q_data.length);
+            const randomElement = q_data[randomIndex];
+            window.location.href = "/questions/" + randomElement.id + ".html?players=" + players;
+        }   
+
+        function next_round() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+
+            window.location.href = "/index.html?players=" + players;
+
+        }   
+    </script>
+    

@@ -1,0 +1,108 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Miss Information</title>
+    </head>
+    <body>
+    <h2>What is the total number of National Parks in the United States?</h2>
+    <table >
+        <tbody>
+            <tr>
+                <td>Rough:</td>
+                <td>± 5%</td>
+            </tr>
+            <tr>
+                <td>Refined:</td>
+                <td>± 10%</td>
+            </tr>
+            <tr>
+                <td>Precise:</td>
+                <td>± 25%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <button id="toggleButton">Show Answer</button>
+
+    <div id="myDiv" style="display: none;">
+        <h2>63</h2>
+        <table >
+            <tbody>
+                <tr>
+                    <td>Rough:</td>
+                    <td>60 - 66</td>
+                </tr>
+                <tr>
+                    <td>Refined:</td>
+                    <td>57 - 69</td>
+                </tr>
+                <tr>
+                    <td>Precise:</td>
+                    <td>47 - 79</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    
+    <button onclick="random_question()" id="skipq">Skip Question</button>
+    <button onclick="next_round()" id="next_round" style="display: none;">Next Round</button>
+
+    <br><br>
+    <h4>Fine Print</h4>
+    According to the Wikipedia page for <a href="https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States">List of national parks of the United States</a>.<br><br>More context from article:<br>The United States has ??? national parks, which are congressionally designated protected areas operated by the National Park Service, an agency of the Department of the Interior. National parks are designated for their natural beauty, unique geological features, diverse ecosystems, and recreational opportunities, typically "because of some outstanding scenic feature or natural phenomena." While legislatively all units of the National Park System are considered equal with the same mission, national parks are generally larger and more of a destination, and hunting and extractive activities are prohibited. National monuments, on the other hand, are also frequently protected for their historical or archaeological significance. XXX national parks (including xxx in Alaska) are paired with a national preserve, areas with different levels of protection that are administered together but considered separate units and whose areas are not included in the figures below. The xxx units of the National Park System can be broadly referred to as national parks, but most have other formal designations.
+    </body>
+
+    </html>
+
+
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            let div = document.getElementById("myDiv");
+            if (div.style.display === "none") {
+                div.style.display = "block";
+                this.style.display = "none";
+                let skipq = document.getElementById("skipq");
+                skipq.style.display = "none";
+                let next_round = document.getElementById("next_round");
+                next_round.style.display = "block";
+            } else {
+                div.style.display = "none";
+                this.innerHTML = "Show Answer";
+            }
+        });
+        
+        var q_data
+        fetch('/sheet.json')
+            .then(response => response.json())
+            .then(data => {
+                q_data = data;
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+            });
+    
+        function random_question() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+            
+            const randomIndex = Math.floor(Math.random() * q_data.length);
+            const randomElement = q_data[randomIndex];
+            window.location.href = "/questions/" + randomElement.id + ".html?players=" + players;
+        }   
+
+        function next_round() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+
+            window.location.href = "/index.html?players=" + players;
+
+        }   
+    </script>
+    

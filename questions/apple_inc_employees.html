@@ -1,0 +1,108 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Miss Information</title>
+    </head>
+    <body>
+    <h2>As of 2021, how many people are employed by Apple Inc.?</h2>
+    <table >
+        <tbody>
+            <tr>
+                <td>Rough:</td>
+                <td>± 10%</td>
+            </tr>
+            <tr>
+                <td>Refined:</td>
+                <td>± 25%</td>
+            </tr>
+            <tr>
+                <td>Precise:</td>
+                <td>± 50%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <button id="toggleButton">Show Answer</button>
+
+    <div id="myDiv" style="display: none;">
+        <h2>164000</h2>
+        <table >
+            <tbody>
+                <tr>
+                    <td>Rough:</td>
+                    <td>147,600 - 180,400</td>
+                </tr>
+                <tr>
+                    <td>Refined:</td>
+                    <td>123,000 - 205,000</td>
+                </tr>
+                <tr>
+                    <td>Precise:</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    
+    <button onclick="random_question()" id="skipq">Skip Question</button>
+    <button onclick="next_round()" id="next_round" style="display: none;">Next Round</button>
+
+    <br><br>
+    <h4>Fine Print</h4>
+    According to <a href="https://www.macrotrends.net/stocks/charts/AAPL/apple/number-of-employees">macrotrends.net</a>. Number of employees on 9/30/2022.
+    </body>
+
+    </html>
+
+
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            let div = document.getElementById("myDiv");
+            if (div.style.display === "none") {
+                div.style.display = "block";
+                this.style.display = "none";
+                let skipq = document.getElementById("skipq");
+                skipq.style.display = "none";
+                let next_round = document.getElementById("next_round");
+                next_round.style.display = "block";
+            } else {
+                div.style.display = "none";
+                this.innerHTML = "Show Answer";
+            }
+        });
+        
+        var q_data
+        fetch('/sheet.json')
+            .then(response => response.json())
+            .then(data => {
+                q_data = data;
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+            });
+    
+        function random_question() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+            
+            const randomIndex = Math.floor(Math.random() * q_data.length);
+            const randomElement = q_data[randomIndex];
+            window.location.href = "/questions/" + randomElement.id + ".html?players=" + players;
+        }   
+
+        function next_round() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+
+            window.location.href = "/index.html?players=" + players;
+
+        }   
+    </script>
+    

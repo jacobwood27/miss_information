@@ -1,0 +1,108 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Miss Information</title>
+    </head>
+    <body>
+    <h2>As of December 31 2022, how many operational satellites are in Earth's orbit?</h2>
+    <table >
+        <tbody>
+            <tr>
+                <td>Rough:</td>
+                <td>factor of 2</td>
+            </tr>
+            <tr>
+                <td>Refined:</td>
+                <td>factor of 5</td>
+            </tr>
+            <tr>
+                <td>Precise:</td>
+                <td>factor of 10</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <button id="toggleButton">Show Answer</button>
+
+    <div id="myDiv" style="display: none;">
+        <h2>6718</h2>
+        <table >
+            <tbody>
+                <tr>
+                    <td>Rough:</td>
+                    <td>3,359 - 13,436</td>
+                </tr>
+                <tr>
+                    <td>Refined:</td>
+                    <td>1,343 - 33,590</td>
+                </tr>
+                <tr>
+                    <td>Precise:</td>
+                    <td>671 - 67,180</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    
+    <button onclick="random_question()" id="skipq">Skip Question</button>
+    <button onclick="next_round()" id="next_round" style="display: none;">Next Round</button>
+
+    <br><br>
+    <h4>Fine Print</h4>
+    According to the Wikipedia article <a href="https://en.wikipedia.org/wiki/Satellite">Satellite</a>. <br><br>Additional context from the article: <br> <br>A satellite or artificial satellite is an object intentionally placed into orbit around a celestial body. Satellites have a variety of uses, including communication relay, weather forecasting, navigation (GPS), broadcasting, scientific research, and Earth observation. Additional military uses are reconnaissance, early warning, signals intelligence and, potentially, weapon delivery. Other satellites include the final rocket stages that place satellites in orbit and formerly useful satellites that later become defunct.<br>Except for passive satellites, most satellites have an electricity generation system for equipment on board, such as solar panels or radioisotope thermoelectric generators (RTGs). Most satellites also have a method of communication to ground stations, called transponders. Many satellites use a standardized bus to save cost and work, the most popular of which is a small CubeSats. Similar satellites can work together as groups, forming constellations. Because of the high launch cost to space, satellites are designed to be as lightweight and robust as possible. Most communication satellites are radio relay stations in orbit and carry dozens of transponders, each with a bandwidth of tens of megahertz.<br> <br>Satellites are placed from the surface to the orbit by launch vehicles, high enough to avoid orbital decay by the atmosphere. Satellites can then change or maintain the orbit by propulsion, usually by chemical or ion thrusters. As of 2018, about 90% of the satellites orbiting the Earth are in low Earth orbit or geostationary orbit; geostationary means the satellites stay still in the sky. Some imaging satellites chose a Sun-synchronous orbit because they can scan the entire globe with similar lighting. As the number of satellites and space debris around Earth increases, the threat of collision has become more severe. A small number of satellites orbit other bodies (such as the Moon, Mars, and the Sun) or many bodies at once (two for a halo orbit, three for a Lissajous orbit).<br> <br>Earth observation satellites gather information for reconnaissance, mapping, monitoring the weather, ocean, forest, etc. Space telescopes take advantage of outer space's near perfect vacuum to observe objects with the entire electromagnetic spectrum. Because satellites can see a large portion of the Earth at once, communications satellites can relay information to remote places. The signal delay from satellites and their orbit's predictability are used in satellite navigation systems, such as GPS. Space probes are satellites designed for robotic space exploration outside of Earth, and space stations are in essence crewed satellites.<br> <br>The first artificial satellite launched into the Earth's orbit was the Soviet Union's Sputnik 1, on October 4, 1957. As of December 31st 2022, there are <mark>???</mark> operational satellites in the Earth's orbit, of which xxx belong to the United States (xxx commercial), xxx belong to China, xxx belong to Russia, and xxx belong to other nations
+    </body>
+
+    </html>
+
+
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            let div = document.getElementById("myDiv");
+            if (div.style.display === "none") {
+                div.style.display = "block";
+                this.style.display = "none";
+                let skipq = document.getElementById("skipq");
+                skipq.style.display = "none";
+                let next_round = document.getElementById("next_round");
+                next_round.style.display = "block";
+            } else {
+                div.style.display = "none";
+                this.innerHTML = "Show Answer";
+            }
+        });
+        
+        var q_data
+        fetch('/sheet.json')
+            .then(response => response.json())
+            .then(data => {
+                q_data = data;
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+            });
+    
+        function random_question() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+            
+            const randomIndex = Math.floor(Math.random() * q_data.length);
+            const randomElement = q_data[randomIndex];
+            window.location.href = "/questions/" + randomElement.id + ".html?players=" + players;
+        }   
+
+        function next_round() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var players = urlParams.get('players');
+
+            window.location.href = "/index.html?players=" + players;
+
+        }   
+    </script>
+    
