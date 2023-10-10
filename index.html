@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +8,8 @@
     <title>Miss Information</title>
     <style>
         .hidden-text {
-            color: white;  /* Assuming the background color of the cell is white */
+            color: white;
+            /* Assuming the background color of the cell is white */
         }
 
         .no-select {
@@ -20,13 +22,30 @@
         .hidden-button {
             display: none;
         }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+        }
+
+        body {
+            font-size: 1rem;
+        }
     </style>
 </head>
 
 <body>
     <h2>Welcome to Miss Information!</h2>
     How many players?
-    <br> <input type="number" id="rowInput" min="3" max="12" step="1" value="4"> <button onclick="generateTable()">GENERATE ROLES</button>
+    <br> <input type="number" id="rowInput" min="3" max="12" step="1" value="4"> <button
+        onclick="generateTable()">GENERATE ROLES</button>
     <br><br>
     <div id="tableContainer">
         <!-- Table will be generated here -->
@@ -68,7 +87,7 @@
     </ol>
 
 
-    
+
 </body>
 
 </html>
@@ -107,22 +126,22 @@
         const randomIndex = Math.floor(Math.random() * q_data.length);
         const randomElement = q_data[randomIndex];
         window.location.href = "questions/" + randomElement.id + ".html?players=" + document.getElementById('rowInput').value;
-    }   
+    }
 
     function revealText(buttonElement) {
         const roleCell = buttonElement.parentElement.previousElementSibling;
         roleCell.classList.remove('hidden-text');
     }
-    
+
     function hideText(buttonElement) {
         const roleCell = buttonElement.parentElement.previousElementSibling;
         roleCell.classList.add('hidden-text');
     }
-    
+
     function processButtonRelease(buttonElement) {
         hideText(buttonElement);
         buttonElement.classList.add('hidden-button');
-    
+
         let nextRow;
         if (buttonElement.parentElement.parentElement.nextElementSibling) {
             nextRow = buttonElement.parentElement.parentElement.nextElementSibling;
@@ -131,16 +150,16 @@
             nextRow = document.querySelector('table tbody tr');
             nextRow = document.querySelector('table tbody tr');
         }
-    
+
         const nextButton = nextRow.querySelector('.show-role-button');
         nextButton.classList.remove('hidden-button');
     }
-    
+
     const buttons = document.querySelectorAll('.show-role-button');
     buttons.forEach(button => {
         button.addEventListener('mousedown', (e) => revealText(e.target));
         button.addEventListener('mouseup', (e) => processButtonRelease(e.target));
-    
+
         // Mobile touch events
         button.addEventListener('touchstart', (e) => {
             e.preventDefault(); // Prevent mouse event emulation
@@ -166,12 +185,12 @@
 
     function generateTable() {
         const numRows = parseInt(document.getElementById('rowInput').value);
-    
+
         const table = document.createElement('table');
         table.border = '1';
         const tbody = document.createElement('tbody');
-        
-        var roles = Array.from({ length: numRows }, (_, i) => "ADVOCATE"); // Creates an array [1, 2, ..., 12]
+
+        var roles = Array.from({ length: numRows }, (_, i) => "ADVOCATE");
         roles[0] = "ARBITRATOR";
         roles[1] = "MISS INFORMATION";
         if (numRows > 6) {
@@ -179,21 +198,21 @@
         }
 
         roles.sort(() => 0.5 - Math.random());
-        
+
         console.log(roles);
-    
+
         for (let i = 0; i < numRows; i++) {
             const tr = document.createElement('tr');
-    
+
             const td1 = document.createElement('td');
             td1.textContent = 'Player ' + (i + 1);
             tr.appendChild(td1);
-    
+
             const td2 = document.createElement('td');
             td2.textContent = roles[i];
             td2.classList.add('hidden-text', 'no-select');
             tr.appendChild(td2);
-    
+
             const td3 = document.createElement('td');
             const button = document.createElement('button');
             button.textContent = 'SHOW ROLE';
@@ -201,23 +220,23 @@
             if (i !== 0) {
                 button.classList.add('hidden-button');
             }
-            button.onmousedown = function() { revealText(button); };
-            button.onmouseup = function() { processButtonRelease(button); };
-            button.onmouseleave = function() { hideText(button); };
-            button.ontouchstart = function(e) {
+            button.onmousedown = function () { revealText(button); };
+            button.onmouseup = function () { processButtonRelease(button); };
+            button.onmouseleave = function () { hideText(button); };
+            button.ontouchstart = function (e) {
                 e.preventDefault();
                 revealText(button);
             };
-            button.ontouchend = function(e) {
+            button.ontouchend = function (e) {
                 e.preventDefault();
                 processButtonRelease(button);
             };
             td3.appendChild(button);
             tr.appendChild(td3);
-    
+
             tbody.appendChild(tr);
         }
-    
+
         table.appendChild(tbody);
         document.getElementById('tableContainer').innerHTML = '';  // Clear previous table if exists
         document.getElementById('tableContainer').appendChild(table);
