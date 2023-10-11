@@ -179,7 +179,7 @@
 
     // read in sheet.json
     var q_data
-    fetch('sheet.json')
+    fetch('ids.json')
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -190,10 +190,9 @@
         });
 
     function random_question() {
-        console.log(q_data)
         const randomIndex = Math.floor(Math.random() * q_data.length);
         const randomElement = q_data[randomIndex];
-        window.location.href = "questions/" + randomElement.id + ".html?players=" + document.getElementById('rowInput').value;
+        window.location.href = "questions/" + randomElement + ".html?players=" + document.getElementById('rowInput').value;
     }
 
     function revealText(buttonElement) {
