@@ -32,6 +32,56 @@
         body {
             font-size: 1rem;
         }
+
+        button {
+            display: inline-block;
+            padding: 12px 24px; /* ample padding for tappability */
+            font-size: 14px; /* readable font size */
+            font-weight: 500; /* semi-bold for better visibility */
+            background-color: #c78fea; /* change to any color */
+            color: #000000; /* white text */
+            border: none;
+            border-radius: 4px; /* rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
+            transition: background-color 0.3s, transform 0.1s; /* smooth transition */
+            text-align: center;
+            cursor: pointer;
+          }
+          
+          /* Button hover state */
+          button:hover {
+            background-color: #8522c3; /* slightly darker shade for hover */
+          }
+          
+          /* Button active state for feedback */
+          button:active {
+            transform: scale(0.95); /* slightly scale down when pressed */
+          }
+
+          tr td{
+            height: calc(16px * 1.2 + 24px);
+            vertical-align: middle; /* centers content vertically */
+            align-self: auto;
+          }
+
+          select {
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            background-color: #c78fea;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            appearance: none; /* removes the default appearance */
+            -webkit-appearance: none; /* for Safari */
+            -moz-appearance: none; /* for Firefox */
+            background-image: url('data:image/svg+xml,...'); /* optionally, a dropdown arrow icon */
+            background-repeat: no-repeat;
+            background-position: right 12px center; /* position the arrow on the right */
+          }
+          
+
     </style>
 </head>
 
