@@ -350,7 +350,7 @@
     {
         "id": "uk_child_mortality_reduction_time",
         "text": "According to <a href=\"https://ourworldindata.org/child-mortality#catch-up-improvements-in-child-mortality\">Our World in Data</a> using data from the Gapminder seried (to 1950) and the World Bank.    <br><br>        The period measured in this case is the first year at which child mortality began to reduce from one-third (i.e. it does not include a period over which child mortality was consistently one-third, which was the case for many countries in the distant past). The end year represents the first year in which child mortality was 5% or less.",
-        "question": "In the UK, how long did it take for child mortality to fall from every 3rd child to every 20th child?",
+        "question": "In the UK, how long did it take for child mortality to fall from every 3rd child to every 20th child, in years?",
         "answer": "148",
         "range1": "\u00b1 10%",
         "range2": "\u00b1 25%",
@@ -388,9 +388,9 @@
         "text": "According to the Wikipedia article <a href=\"https://en.wikipedia.org/wiki/Michael_Phelps\">Michael Phelps</a>.",
         "question": "How many Olympic gold medals has Michael Phelps won?",
         "answer": "23",
-        "range1": "\u00b1 1 medals",
-        "range2": "\u00b1 3 medals",
-        "range3": "\u00b1 5 medals",
+        "range1": "\u00b1 1",
+        "range2": "\u00b1 3",
+        "range3": "\u00b1 5",
         "interval1": "22 - 24",
         "interval2": "20 - 26",
         "interval3": "18 - 28"
@@ -398,7 +398,7 @@
     {
         "id": "global_literacy_2021",
         "text": "According to <a href=\"https://ourworldindata.org/grapher/literacy-rate-adults?tab=table\">Our World in Data</a> using data from the World Bank.    <br><br>        Adult literacy rate is the percentage of people ages 15 and above who can both read and write with understanding a short simple statement about their everyday life. <br><br>Limitations and exceptions: In practice, literacy is difficult to measure. Estimating literacy rates requires census or survey measurements under controlled conditions. Many countries report the number of literate people from self-reported data. Some use educational attainment data as a proxy but apply different lengths of school attendance or levels of completion. Ant there is a trend among recent national and international surveys toward using a direct reading test of literacy skills. Because definitions and methods of data collection differ across countries, data should be used cautiously.<br><br>Statistical concept and methodology: Literacy statistics for most countries cover the population ages 15 and older, but some include younger ages or are confined to age ranges that tend to inflate literacy rates. The youth literacy rate for ages 15-24 reflects recent progress in education. It measures the accumulated outcomes of primary education over the previous 10 years or so by indicating the proportion of the population who have passed through the primary education system and acquired basic literacy and numeracy skills. Generally, literacy also encompasses numeracy, the ability to make simple arithmetic calculations.<br><br>Data on literacy are compiled by the UNESCO Institute for Statistics based on national censuses and household surveys and, for countries without recent literacy data, using the Global Age-Specific Literacy Projection Model (GALP). For detailed information, see www.uis.unesco.org.",
-        "question": "As of 2021, what is the global literacy rate?",
+        "question": "As of 2021, what is the global adult literacy rate?",
         "answer": "86%",
         "range1": "\u00b1 2 pp",
         "range2": "\u00b1 5 pp",
