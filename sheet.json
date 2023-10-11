@@ -261,7 +261,7 @@
         "range3": "\u00b1 50%",
         "interval1": "147,600 - 180,400",
         "interval2": "123,000 - 205,000",
-        "interval3": ""
+        "interval3": "82,000 - 246,000"
     },
     {
         "id": "us_national_parks_count",
@@ -298,5 +298,161 @@
         "interval1": "2005 - 2007",
         "interval2": "2003 - 2009",
         "interval3": "2001 - 2011"
+    },
+    {
+        "id": "trends_peak_crisis",
+        "text": "According to <a href=\"https://trends.google.com/trends/explore?date=all&q=crisis&hl=en\">Google Trends</a> for Worldwide data from 2004-2023. Trends data is presented monthly. This question is asking: In what year did the peak month occur?",
+        "question": "In what year did the number of worldwide Google searches for \"crisis\" peak?",
+        "answer": "2008",
+        "range1": "\u00b1 0 years",
+        "range2": "\u00b1 1 years",
+        "range3": "\u00b1 2 years",
+        "interval1": "2008",
+        "interval2": "2007 - 2009",
+        "interval3": "2006 - 2010"
+    },
+    {
+        "id": "life_expectancy_gender_difference",
+        "text": "According to <a href=\"https://ourworldindata.org/grapher/life-expectancy-of-women-vs-life-expectancy-of-women\">Our World in Data</a> using data from the United Nations, World Population Prospects (2022).    <br><br>        Life expectancy: The average number of remaining years of life expected by a hypothetical cohort of individuals at birth and would be subject during the remainder of their lives to the mortality rates of a given period.",
+        "question": "In 2021, in how many of the 237 UN countries/regions is the life expectancy at birth greater for men than for women?",
+        "answer": "0",
+        "range1": "\u00b1 5 countries",
+        "range2": "\u00b1 20 countries",
+        "range3": "\u00b1 50 countries",
+        "interval1": "0 - 5",
+        "interval2": "0 - 20",
+        "interval3": "0 - 50"
+    },
+    {
+        "id": "israel_life_satisfaction_2021",
+        "text": "According to <a href=\"https://ourworldindata.org/grapher/life-satisfaction-vs-life-expectancy\">Our World in Data</a> using data from the World Happiness Report (2023).    <br><br>        Average of survey responses to the 'Cantril Ladder' question in the Gallup World Poll. The survey question asks respondents to think of a ladder, with the best possible life for them being a 10, and the worst possible life being a 0.    <br><br>    Life evaluations from the Gallup World Poll provide the basis for the annual happiness rankings. They are based on answers to the main life evaluation question asked in the poll.This is called the Cantril ladder: it asks respondents to think of a ladder, with the best possible life for them being a 10 and the worst possible life being a 0. They are then asked to rate their own current lives on that 0 to 10 scale.The rankings are calculated by the source based on nationally representative samples for the three years prior to the year of the report, so that data for the 2023 report will draw from survey data from 2020-2022. We show the data for final year of the three-year survey period, i.e. we show the 2020-2022 survey data as 2022.The only exception is the data for the 2012 report, which uses survey data from 2005-2011, we show this data as the final year of the survey data - 2011.The number of people and countries surveyed varies year to year, but typically more than 100,000 people in 130 countries participate in the Gallup World Poll each year.The rankings are based entirely on the survey scores, using the Gallup weights to make the estimates representative.",
+        "question": "In 2021, what is the average life satisfaction for a resident of Israel, on a scale from 0 to 10?",
+        "answer": "7.36",
+        "range1": "\u00b1 0.25",
+        "range2": "\u00b1 0.5",
+        "range3": "\u00b1 1",
+        "interval1": "7.11 - 7.61",
+        "interval2": "6.86 - 7.86",
+        "interval3": "6.36 - 8.36"
+    },
+    {
+        "id": "exclusively_breastfed_infants_2017",
+        "text": "According to <a href=\"https://ourworldindata.org/child-mortality#promoting-breastfeeding\">Our World in Data</a> using data from UNICEF.    <br><br>        xx% number is estimated by the UNICEF based on the most recent data available for the countries from surveys between 2013-2018.     UNICEF DATA. (2019). Infant and young child feeding.",
+        "question": "In 2017, globally, what fraction of infants <6 months old are exclusively breastfed?",
+        "answer": "41%",
+        "range1": "\u00b1 5 pp",
+        "range2": "\u00b1 10 pp",
+        "range3": "\u00b1 15 pp",
+        "interval1": "36% - 46%",
+        "interval2": "31% - 51%",
+        "interval3": "26% - 56%"
+    },
+    {
+        "id": "uk_child_mortality_reduction_time",
+        "text": "According to <a href=\"https://ourworldindata.org/child-mortality#catch-up-improvements-in-child-mortality\">Our World in Data</a> using data from the Gapminder seried (to 1950) and the World Bank.    <br><br>        The period measured in this case is the first year at which child mortality began to reduce from one-third (i.e. it does not include a period over which child mortality was consistently one-third, which was the case for many countries in the distant past). The end year represents the first year in which child mortality was 5% or less.",
+        "question": "In the UK, how long did it take for child mortality to fall from every 3rd child to every 20th child?",
+        "answer": "148",
+        "range1": "\u00b1 10%",
+        "range2": "\u00b1 25%",
+        "range3": "\u00b1 50%",
+        "interval1": "133 - 163",
+        "interval2": "111 - 185",
+        "interval3": "74 - 222"
+    },
+    {
+        "id": "us_fertility_rate_1960",
+        "text": "According to <a href=\"https://ourworldindata.org/grapher/fertility-rate-with-projections?time=earliest..2022&country=~USA\">Our World in Data</a> using data from the UN, World Population Prospects (2022).    <br><br>        The average number of live births a hypothetical cohort of women would have at the end of their reproductive period if they were subject during their whole lives to the fertility rates of a given period and if they were not subject to mortality. It is expressed as live births per woman. For age-specific fertility rates, it measures number of births to women in a particular age group, divided by the number of women in that age group. The age groups used are: 15-19, 20-24, ..., 45-49. The data refer to annual civil calendar years from 1 January to 31 December.",
+        "question": "In 1960, what was the average fertility rate in the US, in births per woman?",
+        "answer": "3.55",
+        "range1": "\u00b1 0.1",
+        "range2": "\u00b1 0.25",
+        "range3": "\u00b1 0.5",
+        "interval1": "3.45 - 3.65",
+        "interval2": "3.3 - 3.8",
+        "interval3": "3.05 - 4.05"
+    },
+    {
+        "id": "global_births_2021_millions",
+        "text": "According to <a href=\"https://ourworldindata.org/grapher/annual-number-of-births-by-world-region\">Our World in Data</a> using data from the UN, World Population Prospects (2022).    <br><br>        Number of births over a given period. Refers to live births for annual civil calendar years from 1 January to 31 December.",
+        "question": "How many births occurred in 2021 (in millions)?",
+        "answer": "134",
+        "range1": "\u00b1 5%",
+        "range2": "\u00b1 10%",
+        "range3": "\u00b1 25%",
+        "interval1": "127 - 141",
+        "interval2": "120 - 148",
+        "interval3": "100 - 168"
+    },
+    {
+        "id": "michael_phelps_gold_medals",
+        "text": "According to the Wikipedia article <a href=\"https://en.wikipedia.org/wiki/Michael_Phelps\">Michael Phelps</a>.",
+        "question": "How many Olympic gold medals has Michael Phelps won?",
+        "answer": "23",
+        "range1": "\u00b1 1 medals",
+        "range2": "\u00b1 3 medals",
+        "range3": "\u00b1 5 medals",
+        "interval1": "22 - 24",
+        "interval2": "20 - 26",
+        "interval3": "18 - 28"
+    },
+    {
+        "id": "global_literacy_2021",
+        "text": "According to <a href=\"https://ourworldindata.org/grapher/literacy-rate-adults?tab=table\">Our World in Data</a> using data from the World Bank.    <br><br>        Adult literacy rate is the percentage of people ages 15 and above who can both read and write with understanding a short simple statement about their everyday life. <br><br>Limitations and exceptions: In practice, literacy is difficult to measure. Estimating literacy rates requires census or survey measurements under controlled conditions. Many countries report the number of literate people from self-reported data. Some use educational attainment data as a proxy but apply different lengths of school attendance or levels of completion. Ant there is a trend among recent national and international surveys toward using a direct reading test of literacy skills. Because definitions and methods of data collection differ across countries, data should be used cautiously.<br><br>Statistical concept and methodology: Literacy statistics for most countries cover the population ages 15 and older, but some include younger ages or are confined to age ranges that tend to inflate literacy rates. The youth literacy rate for ages 15-24 reflects recent progress in education. It measures the accumulated outcomes of primary education over the previous 10 years or so by indicating the proportion of the population who have passed through the primary education system and acquired basic literacy and numeracy skills. Generally, literacy also encompasses numeracy, the ability to make simple arithmetic calculations.<br><br>Data on literacy are compiled by the UNESCO Institute for Statistics based on national censuses and household surveys and, for countries without recent literacy data, using the Global Age-Specific Literacy Projection Model (GALP). For detailed information, see www.uis.unesco.org.",
+        "question": "As of 2021, what is the global literacy rate?",
+        "answer": "86%",
+        "range1": "\u00b1 2 pp",
+        "range2": "\u00b1 5 pp",
+        "range3": "\u00b1 10 pp",
+        "interval1": "84% - 88%",
+        "interval2": "81% - 91%",
+        "interval3": "76% - 96%"
+    },
+    {
+        "id": "global_height_increase",
+        "text": "According to <a href=\"https://ourworldindata.org/grapher/change-in-male-height-slope?country=~OWID_WRL\">Our World in Data</a> using data from Height and body-mass index trajectories of school-aged children and adolescents from 1985 to 2019 in 200 countries and territories: a pooled analysis of 2181 population-based studies with 65 million participants. Lancet 2020, 396:1511-1524.    <br><br>        Mean height of men aged 18 or older by birth year, extending from 1896 to 1996.",
+        "question": "Globally, how much taller is the average man born in 1996 than 1896, in cm?",
+        "answer": "8.8",
+        "range1": "\u00b1 5%",
+        "range2": "\u00b1 10%",
+        "range3": "\u00b1 25%",
+        "interval1": "8.36 - 9.24",
+        "interval2": "7.92 - 9.68",
+        "interval3": "6.6 - 11"
+    },
+    {
+        "id": "share_internet_2020",
+        "text": "According to <a href=\"https://ourworldindata.org/grapher/share-of-individuals-using-the-internet\">Our World in Data</a> using data from the World Bank.",
+        "question": "As of 2020, what fraction of the global population has used the internet in the last 3 months?",
+        "answer": "59.6%",
+        "range1": "\u00b1 5 pp",
+        "range2": "\u00b1 10 pp",
+        "range3": "\u00b1 15 pp",
+        "interval1": "54.6% - 64.6%",
+        "interval2": "49.6% - 69.6%",
+        "interval3": "44.6% - 74.6%"
+    },
+    {
+        "id": "conflict_deaths_peak",
+        "text": "According to <a href=\"https://ourworldindata.org/grapher/deaths-in-state-based-conflicts-by-world-region\">Our World in Data</a> using data from OWID based on PRIO and UCDP.    <br><br>        Note: 'State-based' conflicts are between states, or a state and a non-state armed organised group. The 'best' estimates fromthe sources are used, or - if unavailable - the mid-point between high and low estimates.<br><br>The UCDP Battle-related Deaths Dataset provides data on direct deaths arising from 'state-based' conflicts. UCDP defines state-based armed conflict as: \u201ca contested incompatibility that concerns government and/or territory where the use of armed force between two parties, of which at least one is the government of a state, results in at least 25 battle-related deaths in a calendar year.\u201d<br><br>Both civilian and military deaths are included. Deaths due to disease or famine caused by conflict, as well as extra-judicial killings in custody, are excluded.<br><br>The data is organised by year and conflict. We aggregate this to provide total numbers of deaths each year, broken down by the conflict type and region.This dataset runs from 1989 and aims to have global coverage over this period. Accordingly, we add a zero deaths observation for year-region-conflict type combinations that do appear in the dataset.<br><br>The labels for the conflict types we have used paraphrase UCDP/PRIO's technical definitions of 'Extrasystemic', 'Internal', 'Internationalised internal' and 'Interstate'.<br><br>Note that in this dataset the location refers not (necessarily) to where fighting and deaths took place, but rather to the location of the 'incompatibility' between the participants that defines the conflict: usually the country or territory whose possession or governance is in dispute.<br><br>To extend the data back further in time we rely on the PRIO Battledeaths Datset, produced according to the same definitions and structure as the UCDP Battle-related Deaths Dataset. The PRIO data runs from 1946 to 2008 and is no longer maintained. We aggregated the PRIO data in the same way as the UCDP data, and then constructed a final joint series which consists of the PRIO data from 1946 to 1988 and the UCDP data from 1989 onwards.",
+        "question": "Between 1953 and 2020, what year saw the most deaths from state-based (between states) conflict? ",
+        "answer": "1971",
+        "range1": "\u00b1 1 years",
+        "range2": "\u00b1 3 years",
+        "range3": "\u00b1 5 years",
+        "interval1": "1970 - 1972",
+        "interval2": "1968 - 1974",
+        "interval3": "1966 - 1976"
+    },
+    {
+        "id": "same_sex_legal",
+        "text": "According to the Wikipedia article <a href=\"https://en.wikipedia.org/wiki/Same-sex_marriage\">Same-sex marriage</a>.     <br><br>       More context from the article: <br>    Same-sex marriage, also known as gay marriage, is the marriage of two people of the same legal sex. As of 2023, marriage between same-sex couples is legally performed and recognized in <mark>???</mark> countries that have a total population of ...",
+        "question": "As of 10 October, 2023, in how many countries is marriage between same-sex couples legally performed and recognized?",
+        "answer": "34",
+        "range1": "\u00b1 10%",
+        "range2": "\u00b1 25%",
+        "range3": "\u00b1 50%",
+        "interval1": "30 - 38",
+        "interval2": "25 - 43",
+        "interval3": "17 - 51"
     }
 ]
