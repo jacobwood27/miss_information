@@ -15,6 +15,31 @@
             body {
                 font-size: 1rem;
             }
+            
+            button {
+                display: inline-block;
+                padding: 8px 16px; /* ample padding for tappability */
+                font-size: 14px; /* readable font size */
+                font-weight: 500; /* semi-bold for better visibility */
+                background-color: #d4adec; /* change to any color */
+                color: #000000; /* white text */
+                border: none;
+                border-radius: 4px; /* rounded corners */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
+                transition: background-color 0.3s, transform 0.1s; /* smooth transition */
+                text-align: center;
+                cursor: pointer;
+              }
+              
+              /* Button hover state */
+              button:hover {
+                background-color: #c697e3; /* slightly darker shade for hover */
+              }
+              
+              /* Button active state for feedback */
+              button:active {
+                transform: scale(0.95); /* slightly scale down when pressed */
+              }
         </style>
     </head>
     <body>
