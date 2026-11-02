@@ -1,0 +1,153 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Miss Information</title>
+        <style>
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            body {
+                font-size: 1rem;
+            }
+            
+            button {
+                display: inline-block;
+                padding: 8px 16px; /* ample padding for tappability */
+                font-size: 14px; /* readable font size */
+                font-weight: 500; /* semi-bold for better visibility */
+                background-color: #d4adec; /* change to any color */
+                color: #000000; /* white text */
+                border: none;
+                border-radius: 4px; /* rounded corners */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
+                transition: background-color 0.3s, transform 0.1s; /* smooth transition */
+                text-align: center;
+                cursor: pointer;
+              }
+              
+              /* Button hover state */
+              button:hover {
+                background-color: #c697e3; /* slightly darker shade for hover */
+              }
+              
+              /* Button active state for feedback */
+              button:active {
+                transform: scale(0.95); /* slightly scale down when pressed */
+              }
+        </style>
+    </head>
+    <body>
+    <h2>In 2019, what fraction of the global population lived in a country where same-sex marriage was legal?</h2>
+    <table >
+        <tbody>
+            <tr>
+                <td>PRECISE:</td>
+                <td>± 2 pp</td>
+            </tr>
+            <tr>
+                <td>REFINED:</td>
+                <td>± 5 pp</td>
+            </tr>
+            <tr>
+                <td>ROUGH:</td>
+                <td>± 10 pp</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <button id="toggleButton">SHOW ANSWER</button>
+
+    <div id="myDiv" style="display: none;">
+        <h2>14.3%</h2>
+        <table >
+            <tbody>
+                <tr>
+                    <td>PRECISE:</td>
+                    <td>12.3% - 16.3%</td>
+                </tr>
+                <tr>
+                    <td>REFINED:</td>
+                    <td>9.3% - 19.3%</td>
+                </tr>
+                <tr>
+                    <td>ROUGH:</td>
+                    <td>4.3% - 24.3%</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    
+    <button onclick="random_question()" id="skipq">SKIP QUESTION</button>
+    <button onclick="next_round()" id="next_round" style="display: none;">NEXT ROUND</button>
+
+    <br><br>
+    <h4>Fine Print</h4>
+    According to <a href="https://ourworldindata.org/grapher/people-marriage-same-sex-partners?stackMode=relative">Our World in Data</a> using data from Kristopher Velasco (2020). <br><br>Measures if there is no legal distinction between same-sex and different-sex marriages.<br><br>This is the population per region with full implementation of the policy.<br><br>This dataset, from the work of Kristopher Velasco (2020), provides a country’s LGBT+ policy landscape by capturing the implementation of 18 different LGBT+ policies. Policies included in the index are limited to those adopted across at least three countries or are explicitly advocated for by transnational activists.<br><br>These policies are subdivided between:<br><br>Progressive policies: 1. Same-Sex Sexual Acts Legal 2. Equal Age of Consent 3. Employment Discrimination 4. Hate Crime Protections 5. Incitement to Hatred 6. Civil Unions 7. Marriage Equality 8. Joint Adoptions 9. Gender Marker Change 10. LGB Military 11. Transgender Military 12. Ban on Conversion Therapies 13. Ban on Gender Assignment Surgeries on Children<br><br>Regressive policies 1. Death Penalty for Same-Sex Sexual Acts 2. Propaganda Laws 3. Same-Sex Sexual Acts Illegal 4. Unequal Age of Consent 5. Ban on Marriage Equality<br><br>Each of these policies score in a range between 0 and 1, according to their level of implementation. Together, they form the LGBT+ Policy Index.<br><br>Additional policies are included in the dataset, as constitutional protections against discrimination, LGB military ban and third gender recognition.<br><br>Multiple sources were consulted to find the necessary data to construct this index. The primary data source was the State Sponsored Homophobia Reports produced by ILGA. These reports, produced almost annually, outline the adoption of various policies and provide some information on implementation. For information on trans- and intersex-specific policies and military information, other sources were used, including the Trans Legal Mapping Report, also produced by ILGA, reports and documentation provided by Transgender Europe, Movement Advancement Project, The Hague Center for Strategic Studies LGBT+ Military Index, and academic studies such as Reynolds (2013). Furthermore, multiple sources were used to obtain data on the evidence of enforcement – particularly arrests – including an extensive newspaper search across each country using LexisNexis and Factiva and other external reports by Amnesty International, Human Rights Watch, and the U.S. State Department.
+    </body>
+
+    </html>
+
+
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            let div = document.getElementById("myDiv");
+            if (div.style.display === "none") {
+                div.style.display = "block";
+                this.style.display = "none";
+                let skipq = document.getElementById("skipq");
+                skipq.style.display = "none";
+                let next_round = document.getElementById("next_round");
+                next_round.style.display = "block";
+            } else {
+                div.style.display = "none";
+                this.innerHTML = "Show Answer";
+            }
+        });
+        
+        
+        // read the url params
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var num_players = urlParams.get('players');
+
+        // if num_players exists and == 0 then remove buttons
+        if (num_players == 0) {
+            let skipq = document.getElementById("skipq");
+            skipq.style.display = "none";
+            let next_round = document.getElementById("next_round");
+            next_round.style.display = "none";
+            let toggle_button = document.getElementById("toggleButton");
+            toggle_button.style.display = "none";
+        }
+        
+        var q_data
+        fetch('/ids.json')
+            .then(response => response.json())
+            .then(data => {
+                q_data = data;
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+            });
+    
+        function random_question() {
+            const randomIndex = Math.floor(Math.random() * q_data.length);
+            const randomElement = q_data[randomIndex];
+            window.location.href = "/questions/" + randomElement + ".html?players=" + num_players;
+        }   
+
+        function next_round() {
+            window.location.href = "/index.html?players=" + num_players;
+
+        }   
+    </script>
+    

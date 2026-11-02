@@ -1,0 +1,153 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Miss Information</title>
+        <style>
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            body {
+                font-size: 1rem;
+            }
+            
+            button {
+                display: inline-block;
+                padding: 8px 16px; /* ample padding for tappability */
+                font-size: 14px; /* readable font size */
+                font-weight: 500; /* semi-bold for better visibility */
+                background-color: #d4adec; /* change to any color */
+                color: #000000; /* white text */
+                border: none;
+                border-radius: 4px; /* rounded corners */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
+                transition: background-color 0.3s, transform 0.1s; /* smooth transition */
+                text-align: center;
+                cursor: pointer;
+              }
+              
+              /* Button hover state */
+              button:hover {
+                background-color: #c697e3; /* slightly darker shade for hover */
+              }
+              
+              /* Button active state for feedback */
+              button:active {
+                transform: scale(0.95); /* slightly scale down when pressed */
+              }
+        </style>
+    </head>
+    <body>
+    <h2>How many land animals were slaughtered for meat in 2021?</h2>
+    <table >
+        <tbody>
+            <tr>
+                <td>PRECISE:</td>
+                <td>± 10%</td>
+            </tr>
+            <tr>
+                <td>REFINED:</td>
+                <td>± 25%</td>
+            </tr>
+            <tr>
+                <td>ROUGH:</td>
+                <td>± 50%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <button id="toggleButton">SHOW ANSWER</button>
+
+    <div id="myDiv" style="display: none;">
+        <h2>83.6 billion</h2>
+        <table >
+            <tbody>
+                <tr>
+                    <td>PRECISE:</td>
+                    <td>75.2 - 92 billion</td>
+                </tr>
+                <tr>
+                    <td>REFINED:</td>
+                    <td>62.7 - 104.5 billion</td>
+                </tr>
+                <tr>
+                    <td>ROUGH:</td>
+                    <td>41.8 - 125.4 billion</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    
+    <button onclick="random_question()" id="skipq">SKIP QUESTION</button>
+    <button onclick="next_round()" id="next_round" style="display: none;">NEXT ROUND</button>
+
+    <br><br>
+    <h4>Fine Print</h4>
+    According to <a href="https://ourworldindata.org/explorers/animal-welfare?facet=none&country=~OWID_WRL&Metric=Animals+slaughtered&Animal=All+land+animals+%28total%29&Per+person=false">Our World in Data</a> using data from the Food and Agriculture Organization of the United Nations.
+    </body>
+
+    </html>
+
+
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            let div = document.getElementById("myDiv");
+            if (div.style.display === "none") {
+                div.style.display = "block";
+                this.style.display = "none";
+                let skipq = document.getElementById("skipq");
+                skipq.style.display = "none";
+                let next_round = document.getElementById("next_round");
+                next_round.style.display = "block";
+            } else {
+                div.style.display = "none";
+                this.innerHTML = "Show Answer";
+            }
+        });
+        
+        
+        // read the url params
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var num_players = urlParams.get('players');
+
+        // if num_players exists and == 0 then remove buttons
+        if (num_players == 0) {
+            let skipq = document.getElementById("skipq");
+            skipq.style.display = "none";
+            let next_round = document.getElementById("next_round");
+            next_round.style.display = "none";
+            let toggle_button = document.getElementById("toggleButton");
+            toggle_button.style.display = "none";
+        }
+        
+        var q_data
+        fetch('/ids.json')
+            .then(response => response.json())
+            .then(data => {
+                q_data = data;
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+            });
+    
+        function random_question() {
+            const randomIndex = Math.floor(Math.random() * q_data.length);
+            const randomElement = q_data[randomIndex];
+            window.location.href = "/questions/" + randomElement + ".html?players=" + num_players;
+        }   
+
+        function next_round() {
+            window.location.href = "/index.html?players=" + num_players;
+
+        }   
+    </script>
+    

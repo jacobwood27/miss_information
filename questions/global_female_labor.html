@@ -1,0 +1,153 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Miss Information</title>
+        <style>
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            body {
+                font-size: 1rem;
+            }
+            
+            button {
+                display: inline-block;
+                padding: 8px 16px; /* ample padding for tappability */
+                font-size: 14px; /* readable font size */
+                font-weight: 500; /* semi-bold for better visibility */
+                background-color: #d4adec; /* change to any color */
+                color: #000000; /* white text */
+                border: none;
+                border-radius: 4px; /* rounded corners */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
+                transition: background-color 0.3s, transform 0.1s; /* smooth transition */
+                text-align: center;
+                cursor: pointer;
+              }
+              
+              /* Button hover state */
+              button:hover {
+                background-color: #c697e3; /* slightly darker shade for hover */
+              }
+              
+              /* Button active state for feedback */
+              button:active {
+                transform: scale(0.95); /* slightly scale down when pressed */
+              }
+        </style>
+    </head>
+    <body>
+    <h2>In 2021, what fraction of females aged 15+ globally were economically active?</h2>
+    <table >
+        <tbody>
+            <tr>
+                <td>PRECISE:</td>
+                <td>± 5 pp</td>
+            </tr>
+            <tr>
+                <td>REFINED:</td>
+                <td>± 10 pp</td>
+            </tr>
+            <tr>
+                <td>ROUGH:</td>
+                <td>± 15 pp</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <button id="toggleButton">SHOW ANSWER</button>
+
+    <div id="myDiv" style="display: none;">
+        <h2>46.2%</h2>
+        <table >
+            <tbody>
+                <tr>
+                    <td>PRECISE:</td>
+                    <td>41.2% - 51.2%</td>
+                </tr>
+                <tr>
+                    <td>REFINED:</td>
+                    <td>36.2% - 56.2%</td>
+                </tr>
+                <tr>
+                    <td>ROUGH:</td>
+                    <td>31.2% - 61.2%</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    
+    <button onclick="random_question()" id="skipq">SKIP QUESTION</button>
+    <button onclick="next_round()" id="next_round" style="display: none;">NEXT ROUND</button>
+
+    <br><br>
+    <h4>Fine Print</h4>
+    According to <a href="https://ourworldindata.org/grapher/female-labor-force-participation-rates?country=~OWID_WRL">Our World in Data</a> using data from the International Labour Organization (via World Bank).<br><br>Labor force participation rate is the proportion of the population ages 15 and older that is economically active: all people who supply labor for the production of goods and services during a specified period.<br><br>Limitations and exceptions: Data on the labor force are compiled by the ILO from labor force surveys, censuses, and establishment censuses and surveys. For some countries a combination of these sources is used. Labor force surveys are the most comprehensive source for internationally comparable labor force data. They can cover all non-institutionalized civilians, all branches and sectors of the economy, and all categories of workers, including people holding multiple jobs. By contrast, labor force data from population censuses are often based on a limited number of questions on the economic characteristics of individuals, with little scope to probe. The resulting data often differ from labor force survey data and vary considerably by country, depending on the census scope and coverage. Establishment censuses and surveys provide data only on the employed population, not unemployed workers, workers in small establishments, or workers in the informal sector.<br><br>The reference period of a census or survey is another important source of differences: in some countries data refer to people's status on the day of the census or survey or during a specific period before the inquiry date, while in others data are recorded without reference to any period. In countries, where the household is the basic unit of production and all members contribute to output, but some at low intensity or irregularly, the estimated labor force may be much smaller than the numbers actually working.<br><br>Differing definitions of employment age also affect comparability. For most countries the working age is 15 and older, but in some countries children younger than 15 work full- or part-time and are included in the estimates. Similarly, some countries have an upper age limit. As a result, calculations may systematically over- or underestimate actual rates.<br><br>Statistical concept and methodology: The labor force is the supply of labor available for producing goods and services in an economy. It includes people who are currently employed and people who are unemployed but seeking work as well as first-time job-seekers. Not everyone who works is included, however. Unpaid workers, family workers, and students are often omitted, and some countries do not count members of the armed forces. Labor force size tends to vary during the year as seasonal workers enter and leave.<br><br>The series is part of the "ILO modeled estimates database," including nationally reported observations and imputed data for countries with missing data, primarily to capture regional and global trends with consistent country coverage. Country-reported microdata is based mainly on nationally representative labor force surveys, with other sources (e.g., household surveys and population censuses) considering differences in the data source, the scope of coverage, methodology, and other country-specific factors. Country analysis requires caution where limited nationally reported data are available. A series of models are also applied to impute missing observations and make projections. However, imputed observations are not based on national data, are subject to high uncertainty, and should not be used for country comparisons or rankings. For more information: https://ilostat.ilo.org/resources/concepts-and-definitions/ilo-modelled-estimates/<br><br>Notes from original source: Given the exceptional situation, including the scarcity of relevant data, the ILO modeled estimates and projections from 2020 onwards are subject to substantial uncertainty.
+    </body>
+
+    </html>
+
+
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            let div = document.getElementById("myDiv");
+            if (div.style.display === "none") {
+                div.style.display = "block";
+                this.style.display = "none";
+                let skipq = document.getElementById("skipq");
+                skipq.style.display = "none";
+                let next_round = document.getElementById("next_round");
+                next_round.style.display = "block";
+            } else {
+                div.style.display = "none";
+                this.innerHTML = "Show Answer";
+            }
+        });
+        
+        
+        // read the url params
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var num_players = urlParams.get('players');
+
+        // if num_players exists and == 0 then remove buttons
+        if (num_players == 0) {
+            let skipq = document.getElementById("skipq");
+            skipq.style.display = "none";
+            let next_round = document.getElementById("next_round");
+            next_round.style.display = "none";
+            let toggle_button = document.getElementById("toggleButton");
+            toggle_button.style.display = "none";
+        }
+        
+        var q_data
+        fetch('/ids.json')
+            .then(response => response.json())
+            .then(data => {
+                q_data = data;
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+            });
+    
+        function random_question() {
+            const randomIndex = Math.floor(Math.random() * q_data.length);
+            const randomElement = q_data[randomIndex];
+            window.location.href = "/questions/" + randomElement + ".html?players=" + num_players;
+        }   
+
+        function next_round() {
+            window.location.href = "/index.html?players=" + num_players;
+
+        }   
+    </script>
+    
